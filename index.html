@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat clicker</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        var createCatClicker = function (numberCat) {
+            var list = document.createElement("ul");
+            document.getElementsByTagName("body")[0].appendChild(list);
+            var area = document.createElement("div");
+            area.id = "area";
+            area.style.outline = "solid black 2px";
+            document.getElementsByTagName("body")[0].appendChild(area);
+            for (var i=1; i<=numberCat; i++) {
+                newCat(i, "cat"+i, "images/cat"+i+".jpg");
+            }
+        }
+
+        var newCat = function(number, name, source) {
+            var listCat = document.createElement("li");
+            listCat.id = name;
+            listCat.innerText = name;
+            document.getElementsByTagName("ul")[0].appendChild(listCat);
+            listCat.addEventListener("click", function() {
+                document.getElementById("area").innerHTML = "";
+                var catName = document.createElement("p");
+                document.getElementById("area").appendChild(catName);
+                catName.innerText = name;
+
+                var catImage = document.createElement("img");
+                catImage.id = "cat" + number;
+                catImage.src = source;
+                catImage.alt = "Cat";
+                document.getElementById("area").appendChild(catImage);
+                
+                var numClicks = document.createElement("p");
+                numClicks.id = "numberClicks" + number;
+                document.getElementById("area").appendChild(numClicks);
+                var click = 0;
+
+                catImage.addEventListener("click", function() {
+                    click = click + 1;
+                    console.log(click);
+                    document.getElementById("numberClicks"+number).innerText = click;
+                }, false);
+
+            
+            });
+        }
+
+        createCatClicker(5);
+
+    </script>
+</body>
+</html>
